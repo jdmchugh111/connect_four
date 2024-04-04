@@ -19,9 +19,5 @@ RSpec.describe Board do
         end
     end
 
-    describe "#print_board" do
-        xit "prints the board" do
-            
-        end
-    end
+    #use runner to test terminal output
 end
