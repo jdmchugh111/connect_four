@@ -8,7 +8,7 @@ class Board
     end
 
     def print_board_map 
-        puts "ABCDEFG"
+        puts "A B C D E F G"
         # print column identifiers
         @board_map.each do |row|
             puts row.join(" ")
