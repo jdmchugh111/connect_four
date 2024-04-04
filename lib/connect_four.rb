@@ -10,11 +10,12 @@ class ConnectFour
     end
 
     def game_setup
-        puts "Would you like to play a game of Connect Four? (y/n)"
+        puts "Would you like to play a game of Connect Four? (p/q)"
+        puts "enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
-        if response == "y"
+        if response == "p"
             play_game
-        else
+        else response == "q"
             puts "Goodbye!"
         end
     end
