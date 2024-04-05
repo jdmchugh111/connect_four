@@ -24,6 +24,7 @@ class ConnectFour
     #     end
     # end
     #possible refactor option ^^^
+    #double check if loop do is the correct loop to use
 
     def play_game
         puts "Welcome to Connect Four!"
@@ -154,6 +155,10 @@ class ConnectFour
             false
         end
     end
+
+    #we can refactor valid_column, row_index, and column_index into one method
+    # make a place piece method in board.rb that takes in a column and a piece
+    # then use them in player_turn and computer_turn as helper methods on this class
 
 
     def game_over?
