@@ -21,50 +21,5 @@ RSpec.describe Board do
 
     #use runner to test terminal output
 
-    #win conditions use range
-
-    def win?(piece)
-        (0..5).each do |row|
-            # so first index is always 0, so our range is 0..5 for rows [0,1,2,3,4,5]
-            (0..6).each do |col|
-                # meaning our range is 0..6 for columns [0,1,2,3,4,5,6]
-                return true if @board_map[row][col..col + 3].all? { |cell| cell == piece } #horizontal win
-                
-            end
-        end
-
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row + i][col] == piece } #vertical win
-            end
-        end
-
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row + i][col + i] == piece }  
-                #diagonal down right 
-            end
-        end
-
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row - i][col + i] == piece } #diagonal up right win
-            end
-        end
-
-        #diagnol up left
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row - i][col - i] == piece }
-            end
-        end
-
-        # diagnol down left
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row + i][col - i] == piece }
-            end
-        end
-
-    end
+    
 end
