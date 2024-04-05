@@ -60,7 +60,7 @@ class ConnectFour
     def computer_turn
         computer_turn = @letter_array.sample
         while !valid_column(computer_turn)
-            @letter_array.sample
+            computer_turn = @letter_array.sample
         end
         row = row_index(computer_turn)
         column = column_index(computer_turn)
@@ -149,6 +149,7 @@ class ConnectFour
             row.include? "."
         end
         if empty_spots == nil
+            true
         end
     end
 
