@@ -14,6 +14,16 @@ class ConnectFour
         @letter_array = ["A", "B", "C", "D", "E", "F", "G"]
     end
 
+    # def play_game
+    #     @board.reset_board #need to create this method in board.rb resets board to empty
+    #     @turns = 0
+    #     loop do
+    #         @board.print_board_map
+    #         take_turn
+    #         break if game_over?
+    #     end
+    # end
+
     def play_game
         puts "Welcome to Connect Four!"
         @board.print_board_map
@@ -22,15 +32,18 @@ class ConnectFour
         end
         puts "Game Over!"
     end
-
+    
     def game_setup
-        puts "Would you like to play a game of Connect Four? (p/q)"
-        puts "enter 'p' to Play! or 'q' to Quit!"
+        puts "Welcome to Connect Four!"
+        puts "Would you like to play a game of Connect Four?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
             play_game
-        else response == "q"
+        elsif response == "q"
             puts "Goodbye!"
+        else
+            puts "Please enter a valid selection"
+            game_setup
         end
     end
 
