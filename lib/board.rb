@@ -1,5 +1,8 @@
 class Board 
-    attr_reader :rows, :columns, :board_map
+    attr_accessor   :rows, 
+                    :columns,
+                    :board_map
+
     def initialize(rows, columns)
         @rows = rows
         @columns = columns
