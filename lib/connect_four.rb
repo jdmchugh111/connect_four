@@ -53,8 +53,6 @@ class ConnectFour
         row = row_index(player_input)
         column = column_index(player_input)
         @board.board_map[row][column] = "X"
-        puts "The current board is:"
-        @board.print_board_map
     end
 
     def computer_turn
