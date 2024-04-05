@@ -23,6 +23,7 @@ class ConnectFour
     #         break if game_over?
     #     end
     # end
+    #possible refactor option ^^^
 
     def play_game
         puts "Welcome to Connect Four!"
@@ -163,5 +164,22 @@ class ConnectFour
             true
         end
     end
-
+    # need refactor to use win? method from board.rb, full? method from board.rb, and reset_board method from board.rb
+    # needs to puts message if someone won or if its a draw
+    # could add method to get response if user wants to play again then we use reset_board
+    # def game_over?
+    #     if @board.win?("X")
+    #         puts "Player wins!"
+    #         return true
+    #     elsif @board.win?("O")
+    #         puts "Computer wins!"
+    #         return true
+    #     elsif @board.full?
+    #         puts "It's a draw!"
+    #         return true
+    #     else    
+    #         false
+    #     end
+    # end
+    # possible refactor option ^^^
 end
