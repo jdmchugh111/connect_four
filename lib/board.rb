@@ -64,4 +64,14 @@ class Board
         end
 
     end
+
+    def full?
+        @board_map.all? { |row| row.none? { |cell| cell == "." } }
+        # checking to see if all cells are full
+    end
+
+    def reset_board
+        @board_map = Array.new(@rows) { Array.new(@columns, ".") }
+        # reset the board to all empty cells
+    end
 end
