@@ -1,5 +1,6 @@
 class ConnectFour
-    #class for runner file
+    attr_reader :turns
+
     def initialize
         @board = Board.new(6,7)
         @turns = 0
@@ -10,6 +11,7 @@ class ConnectFour
         @e_counter = 6
         @f_counter = 6
         @g_counter = 6
+        @letter_array = ["A", "B", "C", "D", "E", "F", "G"]
     end
 
     def play_game
@@ -44,6 +46,10 @@ class ConnectFour
     def player_turn
         puts "Select a column A-G"
         player_input = gets.chomp
+        while !valid_column(player_input)
+            puts "Please enter a valid column selection"
+            player_input = gets.chomp
+        end
         row = row_index(player_input)
         column = column_index(player_input)
         @board.board_map[row][column] = "X"
@@ -52,8 +58,10 @@ class ConnectFour
     end
 
     def computer_turn
-        letter_array = ["A", "B", "C", "D", "E", "F", "G"]
-        computer_turn = letter_array.sample
+        computer_turn = @letter_array.sample
+        while !valid_column(computer_turn)
+            @letter_array.sample
+        end
         row = row_index(computer_turn)
         column = column_index(computer_turn)
         @board.board_map[row][column] = "O"
@@ -101,12 +109,46 @@ class ConnectFour
         end
     end
 
+    def valid_column(input)
+        if input == "A"
+            if @a_counter > 0
+                true
+            end
+        elsif input == "B"
+            if @b_counter > 0
+                true
+            end
+        elsif input == "C"
+            if @c_counter > 0
+                true
+            end
+        elsif input == "D"
+            if @d_counter > 0
+                true
+            end
+        elsif input == "E"
+            if @e_counter > 0
+                true
+            end
+        elsif input == "F"
+            if @f_counter > 0
+                true
+            end
+        elsif input == "G"
+            if @g_counter > 0
+                true
+            end
+        else
+            false
+        end
+    end
+
+
     def game_over?
-        full_board = @board.board_map.find do |row|
+        empty_spots = @board.board_map.find do |row|
             row.include? "."
         end
-        if full_board == nil
-            true
+        if empty_spots == nil
         end
     end
 
