@@ -21,19 +21,19 @@ class Board
     #win conditions use range
 
     def win?(piece)
+
         (0..5).each do |row|
             # so first index is always 0, so our range is 0..5 for rows [0,1,2,3,4,5]
             (0..6).each do |col|
                 # meaning our range is 0..6 for columns [0,1,2,3,4,5,6]
                 return true if @board_map[row][col..col + 3].all? { |cell| cell == piece } #horizontal win
-                # of the row we are on, check set of four by col..col + 3 (same as saying check index 0,1,2,3), we are calling the idices cells, then all method will return true if all cells are the same as the piece
-                
+                # ^^ this was giving a false positive player win if you opened with one piece in column G             
             end
         end
 
         (0..5).each do |row|
             (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row + i][col] == piece } #vertical win
+                (0..3).all? { |i| @board_map[row + i][col] == piece } #vertical win
                 # same concept but now we check if the piece is the same for the four cells in the same column, we use i to represent the index of the cell we are checking and to move down the column
             end
         end
@@ -62,6 +62,8 @@ class Board
                 return true if (0..3).all? { |i| @board_map[row + i][col - i] == piece } # diagnol down left
             end
         end
+
+        false
 
     end
 

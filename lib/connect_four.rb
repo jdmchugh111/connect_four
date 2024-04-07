@@ -32,7 +32,7 @@ class ConnectFour
         while !game_over?
         take_turn
         end
-        puts "Game Over!"
+        restart_game
     end
     
     def game_setup
@@ -161,30 +161,54 @@ class ConnectFour
     # then use them in player_turn and computer_turn as helper methods on this class
 
 
-    def game_over?
-        empty_spots = @board.board_map.find do |row|
-            row.include? "."
-        end
-        if empty_spots == nil
-            true
-        end
-    end
+    # def game_over?
+    #     empty_spots = @board.board_map.find do |row|
+    #         row.include? "."
+    #     end
+    #     if empty_spots == nil
+    #         true
+    #     end
+    # end
     # need refactor to use win? method from board.rb, full? method from board.rb, and reset_board method from board.rb
     # needs to puts message if someone won or if its a draw
     # could add method to get response if user wants to play again then we use reset_board
-    # def game_over?
-    #     if @board.win?("X")
-    #         puts "Player wins!"
-    #         return true
-    #     elsif @board.win?("O")
-    #         puts "Computer wins!"
-    #         return true
-    #     elsif @board.full?
-    #         puts "It's a draw!"
-    #         return true
-    #     else    
-    #         false
-    #     end
-    # end
+    def game_over?
+        if @board.win?("X")
+            @board.print_board_map
+            puts "Player wins!"
+            return true
+        elsif @board.win?("O")
+            @board.print_board_map
+            puts "Computer wins!"
+            return true
+        elsif @board.full?
+            puts "It's a draw!"
+            return true
+        else    
+            false
+        end
+    end
+
+    def restart_game
+        @board.reset_board
+        @turns = 0
+        @a_counter = 6
+        @b_counter = 6
+        @c_counter = 6
+        @d_counter = 6
+        @e_counter = 6
+        @f_counter = 6
+        @g_counter = 6
+        puts "Would you like to play again?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
+        response = gets.chomp
+        if response == "p"
+            play_game
+        elsif response == "q"
+            puts "Goodbye!"
+        else
+            puts "Please enter a valid selection"
+            game_setup
+        end
+    end
     # possible refactor option ^^^
 end
