@@ -14,6 +14,18 @@ class ConnectFour
         @letter_array = ["A", "B", "C", "D", "E", "F", "G"]
     end
 
+    # def play_game
+    #     @board.reset_board #need to create this method in board.rb resets board to empty
+    #     @turns = 0
+    #     loop do
+    #         @board.print_board_map
+    #         take_turn
+    #         break if game_over?
+    #     end
+    # end
+    #possible refactor option ^^^
+    #double check if loop do is the correct loop to use
+
     def play_game
         puts "Welcome to Connect Four!"
         @board.print_board_map
@@ -22,15 +34,18 @@ class ConnectFour
         end
         puts "Game Over!"
     end
-
+    
     def game_setup
-        puts "Would you like to play a game of Connect Four? (p/q)"
-        puts "enter 'p' to Play! or 'q' to Quit!"
+        puts "Welcome to Connect Four!"
+        puts "Would you like to play a game of Connect Four?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
             play_game
-        else response == "q"
+        elsif response == "q"
             puts "Goodbye!"
+        else
+            puts "Please enter a valid selection"
+            game_setup
         end
     end
 
@@ -141,6 +156,10 @@ class ConnectFour
         end
     end
 
+    #we can refactor valid_column, row_index, and column_index into one method
+    # make a place piece method in board.rb that takes in a column and a piece
+    # then use them in player_turn and computer_turn as helper methods on this class
+
 
     def game_over?
         empty_spots = @board.board_map.find do |row|
@@ -150,5 +169,22 @@ class ConnectFour
             true
         end
     end
-
+    # need refactor to use win? method from board.rb, full? method from board.rb, and reset_board method from board.rb
+    # needs to puts message if someone won or if its a draw
+    # could add method to get response if user wants to play again then we use reset_board
+    # def game_over?
+    #     if @board.win?("X")
+    #         puts "Player wins!"
+    #         return true
+    #     elsif @board.win?("O")
+    #         puts "Computer wins!"
+    #         return true
+    #     elsif @board.full?
+    #         puts "It's a draw!"
+    #         return true
+    #     else    
+    #         false
+    #     end
+    # end
+    # possible refactor option ^^^
 end

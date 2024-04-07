@@ -20,4 +20,6 @@ RSpec.describe Board do
     end
 
     #use runner to test terminal output
+
+    
 end
