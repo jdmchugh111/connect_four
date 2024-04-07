@@ -156,22 +156,10 @@ class ConnectFour
         end
     end
 
-    #we can refactor valid_column, row_index, and column_index into one method
+    # we can refactor valid_column, row_index, and column_index into one method
     # make a place piece method in board.rb that takes in a column and a piece
     # then use them in player_turn and computer_turn as helper methods on this class
 
-
-    # def game_over?
-    #     empty_spots = @board.board_map.find do |row|
-    #         row.include? "."
-    #     end
-    #     if empty_spots == nil
-    #         true
-    #     end
-    # end
-    # need refactor to use win? method from board.rb, full? method from board.rb, and reset_board method from board.rb
-    # needs to puts message if someone won or if its a draw
-    # could add method to get response if user wants to play again then we use reset_board
     def game_over?
         if @board.win?("X")
             @board.print_board_map
@@ -210,5 +198,4 @@ class ConnectFour
             game_setup
         end
     end
-    # possible refactor option ^^^
 end
