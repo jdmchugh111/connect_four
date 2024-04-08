@@ -39,8 +39,8 @@ class GameFunctions
     end
 
     def valid_column?(input)
-        @counters[input] && @counters[input] > 0
-        # prevents nil > 0 error
+        @counters.key?(input) && @counters[input] > 0
+        # prevents nil > 0 error giving nil instead of false
     end
 
     def game_over?
