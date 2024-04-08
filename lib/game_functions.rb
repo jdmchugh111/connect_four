@@ -4,15 +4,7 @@ class GameFunctions
     def initialize(rows, columns)
         @board = Board.new(rows, columns)
         @turns = 0
-        # @a_counter = 6
-        # @b_counter = 6
-        # @c_counter = 6
-        # @d_counter = 6
-        # @e_counter = 6
-        # @f_counter = 6
-        # @g_counter = 6
-        # @letter_array = ["A", "B", "C", "D", "E", "F", "G"]
-        counters = Hash[("A".."G").map { |letter| [letter, 6] }]
+        @counters = Hash[("A".."G").map { |letter| [letter, 6] }]
     end
 
     def take_turn
@@ -24,34 +16,20 @@ class GameFunctions
         @turns += 1
     end
 
-    def player_turn(player_input)
+    def player_turn(player_input, piece)
         column = column_index(player_input)
         if column && valid_column?(player_input)
             row = @counters[player_input] -= 1
-            @board.board_map[row][column] = "X"
+            @board.board_map[row][column] = piece
         end
     end
 
-
-    # def player_turn(player_input)
-    #     row = row_index(player_input)
-    #     column = column_index(player_input)
-    #     @board.board_map[row][column] = "X"
-    # end
-
     def computer_turn
         computer_choice = @counters.keys.sample
-        player_turn(computer_choice)
+        player_turn(computer_choice, "O")
+        @board.print_board_map
         #leverage player_turn method to place computer piece
     end
-
-    # def computer_turn
-    #     computer_turn = @letter_array.sample
-    #     row = row_index(computer_turn)
-    #     column = column_index(computer_turn)
-    #     @board.board_map[row][column] = "O"
-    #     @board.print_board_map
-    # end
 
     def column_index(player_input)
         columns = {"A" => 0, "B" => 1, "C" => 2, "D" => 3, "E" => 4, "F" => 5, "G" => 6}

@@ -30,7 +30,7 @@ class ConnectFour
 
     def take_turn_terminal
         column_input = player_input
-        if @game.player_turn(column_input)
+        if @game.player_turn(column_input, "X")
             @game.computer_turn
         else
             puts "Please enter a valid column selection"
@@ -63,6 +63,7 @@ class ConnectFour
             puts "Goodbye!"
         else
             puts "Please enter a valid selection"
+            new_game
         end
     end
 
