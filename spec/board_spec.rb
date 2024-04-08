@@ -20,26 +20,39 @@ RSpec.describe Board do
     end
 
     describe "#win?" do
-        it "returns true if there are four in a row horizontally" do
+        it "returns false if there is no win" do
             @board.instance_variable_set(:@board_map, [
-                ["X", "X", "X", "X", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."]
             ])
+            expect(@board.win?("X")).to eq(false)
+            expect(@board.win?("O")).to eq(false)
+        end
+
+        it "returns true if there are four in a row horizontally" do
+            @board.instance_variable_set(:@board_map, [
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                ["X", "X", "X", "X", ".", ".", "."]
+            ])
             expect(@board.win?("X")).to eq(true)
         end
 
         it "returns true if there are four in a row vertically" do
             @board.instance_variable_set(:@board_map, [
-                ["X", ".", ".", ".", ".", ".", "."],
-                ["X", ".", ".", ".", ".", ".", "."],
-                ["X", ".", ".", ".", ".", ".", "."],
-                ["X", ".", ".", ".", ".", ".", "."],
                 [".", ".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", ".", "."]
+                [".", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."]
             ])
             expect(@board.win?("X")).to eq(true)
         end
@@ -68,6 +81,54 @@ RSpec.describe Board do
             expect(@board.win?("X")).to eq(true)
         end
     end
+
+    describe "#full?" do
+        it "returns false when board is not full" do
+            @board.instance_variable_set(:@board_map, [
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."]
+            ])
+        
+            expect(@board.full?).to eq(false)
+        end
+
+        it "returns true when board is full" do
+            @board.instance_variable_set(:@board_map,[
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"]])
+                expect(@board.full?).to eq(true)
+        end
+    end
+
+    describe "#reset_board" do
+        it "resets to an empty board" do
+            @board.instance_variable_set(:@board_map,[
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"],
+                ["X", "X", "X", "X", "X", "X", "X"]])
+            @board.reset_board
+            empty_board = [[".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."]]
+            expect(@board.board_map).to eq(empty_board)
+        end
+    end
+
+    
 
     #use runner to test terminal output
 
