@@ -1,5 +1,7 @@
 class GameFunctions
-    attr_reader :board
+    attr_reader :board, 
+                :turns, 
+                :counters
 
     def initialize(rows, columns)
         @board = Board.new(rows, columns)
