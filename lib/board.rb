@@ -34,25 +34,25 @@ class Board
         end
 
         (0..2).each do |row|
-            (0..6).each do |col|
+            (0..3).each do |col|
                 return true if (0..3).all? { |i| @board_map[row + i][col + i] == piece }  #diagonal down right 
             end
         end
 
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row - i][col + i] == piece } #diagonal up right
-            end
-        end
+        # (0..5).each do |row|
+        #     (0..6).each do |col|
+        #         return true if (0..3).all? { |i| @board_map[row - i][col + i] == piece } #diagonal up right
+        #     end
+        # end
 
-        (0..5).each do |row|
-            (0..6).each do |col|
-                return true if (0..3).all? { |i| @board_map[row - i][col - i] == piece } #diagonal up left
-            end
-        end
+        # (0..5).each do |row|
+        #     (0..6).each do |col|
+        #         return true if (0..3).all? { |i| @board_map[row - i][col - i] == piece } #diagonal up left
+        #     end
+        # end
 
         (0..2).each do |row|
-            (0..6).each do |col|
+            (3..6).each do |col|
                 return true if (0..3).all? { |i| @board_map[row + i][col - i] == piece } # diagonal down left
             end
         end
