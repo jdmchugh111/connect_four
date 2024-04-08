@@ -19,6 +19,56 @@ RSpec.describe Board do
         end
     end
 
+    describe "#win?" do
+        it "returns true if there are four in a row horizontally" do
+            @board.instance_variable_set(:@board_map, [
+                ["X", "X", "X", "X", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."]
+            ])
+            expect(@board.win?("X")).to eq(true)
+        end
+
+        it "returns true if there are four in a row vertically" do
+            @board.instance_variable_set(:@board_map, [
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."]
+            ])
+            expect(@board.win?("X")).to eq(true)
+        end
+
+        it "returns true if there are four in a row diagonally left" do
+            @board.instance_variable_set(:@board_map, [
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                ["X", ".", ".", ".", ".", ".", "."],
+                [".", "X", ".", ".", ".", ".", "."],
+                [".", ".", "X", ".", ".", ".", "."],
+                [".", ".", ".", "X", ".", ".", "."]
+            ])
+            expect(@board.win?("X")).to eq(true)
+        end
+
+        it "returns true if there are four in a row diagonally right" do
+            @board.instance_variable_set(:@board_map, [
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "."],
+                [".", ".", ".", ".", ".", ".", "X"],
+                [".", ".", ".", ".", ".", "X", "."],
+                [".", ".", ".", ".", "X", ".", "."],
+                [".", ".", ".", "X", ".", ".", "."]
+            ])
+            expect(@board.win?("X")).to eq(true)
+        end
+    end
+
     #use runner to test terminal output
 
     
