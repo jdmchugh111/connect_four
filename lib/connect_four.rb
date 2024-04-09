@@ -2,6 +2,7 @@ class ConnectFour
 
     def initialize
         @game = GameFunctions.new(6,7)
+        @player = nil
     end
 
     def play_game
@@ -14,10 +15,11 @@ class ConnectFour
     end
 
     def game_setup
-        puts "Welcome to Connect Four!"
+        puts "Welcome to Connect Four!" 
         puts "Would you like to play a game of Connect Four?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
+            player_details
             play_game
         elsif response == "q"
             puts "Goodbye!"
@@ -26,6 +28,13 @@ class ConnectFour
             game_setup
         end
     end
+
+    def player_details
+        puts "Please enter your name"
+        name = gets.chomp
+        @player = Player.generate_player(name)
+    end
+
 
     def take_turn_terminal
         column_input = player_input
@@ -43,8 +52,16 @@ class ConnectFour
 
     def game_over_output
         if @game.game_over? == :player_won
+            @player.increment_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json(Player.rank)
+            # @player.player_won
             puts "Player wins!"
         elsif @game.game_over? == :computer_won
+            @player.decrement_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json(Player.rank)
+            # @player.player_lost
             puts "Computer wins!"
         elsif @game.game_over? == :draw
             puts "It's a draw!"

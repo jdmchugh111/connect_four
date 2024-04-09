@@ -35,4 +35,23 @@ class Player
     def self.read_json
         JSON.parse(File.read("./lib/rank.json"))
     end
+
+    def self.generate_player(name)
+        new_player = Player.new(name)
+        update_rank(name, new_player.mmr)
+        new_player
+    end
+
+    # def player_won
+    #     increment_mmr
+    #     Player.update_rank(player.name, player.mmr)
+    #     Player.write_json(Player.rank)
+    # end
+
+    # def player_lost
+    #     decrement_mmr
+    #     Player.update_rank(player.name, player.mmr)
+    #     Player.write_json(Player.rank)
+    # end
+
 end
