@@ -1,5 +1,4 @@
 class ConnectFour
-    attr_reader :turns
 
     def initialize
         @game = GameFunctions.new(6,7)
