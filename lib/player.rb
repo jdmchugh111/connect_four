@@ -1,3 +1,5 @@
+require 'json'
+
 class Player
     @@rank = {}
 
@@ -16,14 +18,18 @@ class Player
         @mmr -= 10
     end
 
-    def self.update_rank(name)
-        rank[name] = 10
+    def self.update_rank(name, mmr)
+        @@rank[name] = mmr
     end
 
     def self.write_json(rank)
         File.open("./lib/rank.json", "w") do |f|
-            f.write(rank.to_json)
+            f.write(JSON.generate(rank))
         end
+    end
+
+    def self.rank
+        @@rank
     end
 
     def self.read_json

@@ -24,6 +24,7 @@ describe Player do
 
     describe "#decrement_mmr" do
         it "decrements the player's MMR" do
+            @player.increment_mmr
             @player.decrement_mmr
             expect(@player.mmr).to eql(10)
         end
@@ -31,26 +32,28 @@ describe Player do
 
     describe "update_rank" do
         it "updates the class variable rank" do
-            Player.update_rank("Player 1")
-            expect(Player.rank).to eql({"Player 1" => 10})
+            @player.increment_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            expect(Player.rank).to eql({"Player 1" => 20})
         end
     end
 
     describe ".write_json" do
         it "writes to the JSON file" do
-            Player.write_json(rank)
-        end
-    end
-
-    describe ".read_json" do
-        it "reads the JSON file" do
-            
+            @player.increment_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json(Player.rank)
+            expect(File.exist?("./lib/rank.json")).to eql(true)
+            expect(Player.read_json).to eql({"Player 1" => 20})
         end
     end
         
     describe ".rank" do
         it "returns the class variable rank" do
-            expect(Player.rank).to eql({"Player 1" => 10})
+            @player.increment_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json(Player.rank)
+            expect(Player.rank).to eql({"Player 1" => 20})
         end
     end
 
