@@ -7,12 +7,10 @@ class Board
         @rows = rows
         @columns = columns
         @board_map = Array.new(rows) { Array.new(columns, ".") }
-        # create board of arrs, each row is an array of columns
     end
 
     def print_board_map 
         puts "A B C D E F G"
-        # print column identifiers
         @board_map.each do |row|
             puts row.join(" ")
         end
@@ -38,18 +36,6 @@ class Board
                 return true if (0..3).all? { |i| @board_map[row + i][col + i] == piece }  #diagonal down right 
             end
         end
-
-        # (0..5).each do |row|
-        #     (0..6).each do |col|
-        #         return true if (0..3).all? { |i| @board_map[row - i][col + i] == piece } #diagonal up right
-        #     end
-        # end
-
-        # (0..5).each do |row|
-        #     (0..6).each do |col|
-        #         return true if (0..3).all? { |i| @board_map[row - i][col - i] == piece } #diagonal up left
-        #     end
-        # end
 
         (0..2).each do |row|
             (3..6).each do |col|

@@ -28,9 +28,11 @@ class GameFunctions
 
     def computer_turn
         computer_choice = @counters.keys.sample
+        while !valid_column?(computer_choice)
+            computer_choice = @counters.keys.sample
+        end
         player_turn(computer_choice, "O")
         @board.print_board_map
-        #leverage player_turn method to place computer piece
     end
 
     def column_index(player_input)
@@ -40,7 +42,6 @@ class GameFunctions
 
     def valid_column?(input)
         @counters.key?(input) && @counters[input] > 0
-        # prevents nil > 0 error giving nil instead of false
     end
 
     def game_over?

@@ -30,13 +30,11 @@ describe GameFunctions do
         it "places a piece on the board" do
                 @game.computer_turn
                 expect(@game.board.board_map.flatten.include?("O")).to eq(true)
-            end
+        end
         it "decreases the counter for the column" do
                 @game.computer_turn
                 expect(@game.counters.values.sum).to eq(41)
-            end
-
-            # have to check if array includes and sum of counters because we dont know what the computer chose
+        end
     end
 
     describe "#column_index" do
@@ -74,8 +72,7 @@ describe GameFunctions do
                 expect(@game.game_over?).to eq(:computer_won)
         end
         it "returns :draw if the board is full" do
-                @game.board.board_map = Array.new(6) { Array.new(7, "L") }
-                # just used random letter to fill the board
+                @game.board.board_map = Array.new(6) { Array.new(7, "Z") }
                 expect(@game.game_over?).to eq(:draw)
         end
         it "returns false if the game is not over" do
