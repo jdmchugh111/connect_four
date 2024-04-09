@@ -54,13 +54,13 @@ class ConnectFour
         if @game.game_over? == :player_won
             @player.increment_mmr
             Player.update_rank(@player.name, @player.mmr)
-            Player.write_json(Player.rank)
+            Player.write_json
             # @player.player_won
             puts "Player wins!"
         elsif @game.game_over? == :computer_won
             @player.decrement_mmr
             Player.update_rank(@player.name, @player.mmr)
-            Player.write_json(Player.rank)
+            Player.write_json
             # @player.player_lost
             puts "Computer wins!"
         elsif @game.game_over? == :draw

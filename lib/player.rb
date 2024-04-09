@@ -5,9 +5,9 @@ class Player
 
     attr_reader :name, :mmr
 
-    def initialize(name)
+    def initialize(name, mmr)
         @name = name
-        @mmr = 0
+        @mmr = mmr
     end
 
     def increment_mmr
@@ -22,9 +22,12 @@ class Player
         @@rank[name] = mmr
     end
 
-    def self.write_json(rank)
+    def self.write_json
+        players_data = read_json
+        updated_data = players_data.merge(@@rank)
+
         File.open("./lib/rank.json", "w") do |f|
-            f.write(JSON.generate(rank))
+            f.write(JSON.generate(updated_data))
         end
     end
 
@@ -37,9 +40,15 @@ class Player
     end
 
     def self.generate_player(name)
-        new_player = Player.new(name)
-        update_rank(name, new_player.mmr)
+        mmr = last_updated_rank(name)
+        new_player = Player.new(name, mmr)
+        update_rank(name, mmr)
         new_player
+    end
+
+    def self.last_updated_rank(name)
+        players_data = read_json
+        mmr = players_data[name] || 0
     end
 
     # def player_won
