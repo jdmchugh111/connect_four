@@ -66,10 +66,21 @@ class ConnectFour
         elsif @game.game_over? == :draw
             puts "It's a draw!"
         end
+        print_leaderboard
         new_game
     end
 
+    def print_leaderboard
+        puts "Leaderboard"
+        players_data = Player.read_json
+        top_five = players_data.sort_by { |name, mmr| mmr }.reverse.first(5)
+        top_five.each_with_index do |(name, mmr), index|
+            puts "#{index + 1}. #{name} - #{mmr} Rank Points"
+        end
+    end
+
     def new_game
+        
         puts "Would you like to play again?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"

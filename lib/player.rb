@@ -26,8 +26,8 @@ class Player
         players_data = read_json
         updated_data = players_data.merge(@@rank)
 
-        File.open("./lib/rank.json", "w") do |f|
-            f.write(JSON.generate(updated_data))
+        File.open("./lib/rank.json", "w") do |file|
+            file.write(JSON.generate(updated_data))
         end
     end
 
