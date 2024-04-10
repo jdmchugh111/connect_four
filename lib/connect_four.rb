@@ -2,6 +2,7 @@ class ConnectFour
 
     def initialize
         @game = GameFunctions.new(6,7)
+        @player = nil
     end
 
     def play_game
@@ -14,10 +15,11 @@ class ConnectFour
     end
 
     def game_setup
-        puts "Welcome to Connect Four!"
+        puts "Welcome to Connect Four!" 
         puts "Would you like to play a game of Connect Four?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
+            player_details
             play_game
         elsif response == "q"
             puts "Goodbye!"
@@ -26,6 +28,13 @@ class ConnectFour
             game_setup
         end
     end
+
+    def player_details
+        puts "Please enter your name"
+        name = gets.chomp
+        @player = Player.generate_player(name)
+    end
+
 
     def take_turn_terminal
         column_input = player_input
@@ -43,16 +52,35 @@ class ConnectFour
 
     def game_over_output
         if @game.game_over? == :player_won
+            @player.increment_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json
+            # @player.player_won
             puts "Player wins!"
         elsif @game.game_over? == :computer_won
+            @player.decrement_mmr
+            Player.update_rank(@player.name, @player.mmr)
+            Player.write_json
+            # @player.player_lost
             puts "Computer wins!"
         elsif @game.game_over? == :draw
             puts "It's a draw!"
         end
+        print_leaderboard
         new_game
     end
 
+    def print_leaderboard
+        puts "Leaderboard"
+        players_data = Player.read_json
+        top_five = players_data.sort_by { |name, mmr| mmr }.reverse.first(5)
+        top_five.each_with_index do |(name, mmr), index|
+            puts "#{index + 1}. #{name} - #{mmr} Rank Points"
+        end
+    end
+
     def new_game
+        
         puts "Would you like to play again?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
