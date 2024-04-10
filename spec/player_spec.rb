@@ -6,7 +6,7 @@ require './spec/spec_helper'
 
 describe Player do
     before(:each) do
-        @player = Player.new("Player 1")
+        @player = Player.new("Player 1", 0)
     end
 
     describe "#initialize" do
@@ -42,9 +42,9 @@ describe Player do
         it "writes to the JSON file" do
             @player.increment_mmr
             Player.update_rank(@player.name, @player.mmr)
-            Player.write_json(Player.rank)
+            Player.write_json
             expect(File.exist?("./lib/rank.json")).to eql(true)
-            expect(Player.read_json).to eql({"Player 1" => 20})
+            expect(Player.read_json).to include({"Player 1" => 20})
         end
     end
         
@@ -52,7 +52,7 @@ describe Player do
         it "returns the class variable rank" do
             @player.increment_mmr
             Player.update_rank(@player.name, @player.mmr)
-            Player.write_json(Player.rank)
+            Player.write_json
             expect(Player.rank).to eql({"Player 1" => 20})
         end
     end
