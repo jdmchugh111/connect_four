@@ -80,7 +80,6 @@ class ConnectFour
     end
 
     def new_game
-        
         puts "Would you like to play again?" + "\n" + "Enter 'p' to Play! or 'q' to Quit!"
         response = gets.chomp
         if response == "p"
