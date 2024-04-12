@@ -54,4 +54,8 @@ class Board
     def reset_board
         @board_map = Array.new(@rows) { Array.new(@columns, ".") }
     end
+
+    def new_feature
+        # definitely a crazy new feature
+    end
 end
