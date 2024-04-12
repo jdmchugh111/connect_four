@@ -55,7 +55,6 @@ class Board
         @board_map = Array.new(@rows) { Array.new(@columns, ".") }
     end
 
-    def new_feature
-        # definitely a crazy new feature
-    end
+    # adding pr template
+    
 end
